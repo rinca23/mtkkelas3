@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="id">
+ <head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260708-01-ba9fa57"}');</script><script src="/_sdk/f432b76fb310b513.telemetry_sdk.js" integrity="sha512-9FJQ55EKmmqhyyik8BhrMVfm0+iYYfb8uOlRsjtkxJMEI97qOVEI4PnHohDjQAtvAep0IOEpdQ64eki0sz62ug=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Petualangan Matematika</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&amp;family=Fredoka:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+:root{--primary:#6366f1;--primary-dark:#4f46e5;--secondary:#f59e0b;--success:#10b981;--danger:#ef4444;--bg:#f0f4ff;--card:#ffffff;--text:#1e293b;--text-light:#64748b;--vh:1vh}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+h1,h2,h3,.heading{font-family:'Fredoka',sans-serif}
+.btn{padding:10px 20px;border-radius:12px;font-weight:600;cursor:pointer;border:none;transition:all .2s;font-size:15px;display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary-dark)}
+.btn-secondary{background:var(--secondary);color:#fff}.btn-secondary:hover{background:#d97706}
+.btn-success{background:var(--success);color:#fff}.btn-success:hover{background:#059669}
+.btn-danger{background:var(--danger);color:#fff}.btn-danger:hover{background:#dc2626}
+.btn-outline{background:transparent;border:2px solid var(--primary);color:var(--primary)}.btn-outline:hover{background:var(--primary);color:#fff}
+.btn-sm{padding:6px 14px;font-size:13px;border-radius:8px}
+.card{background:var(--card);border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.sidebar{width:260px;background:#1e1b4b;color:#fff;height:calc(100*min(var(--vh,1vh),1vh));position:fixed;left:0;top:0;z-index:50;transition:transform .3s;overflow-y:auto}
+.sidebar.hidden-mobile{transform:translateX(-100%)}
+.sidebar-item{padding:12px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;border-radius:10px;margin:4px 12px;transition:all .2s;font-size:14px}
+.sidebar-item:hover,.sidebar-item.active{background:rgba(255,255,255,.15)}
+.sidebar-item.active{background:var(--primary)}
+.main-content{margin-left:260px;padding:20px;min-height:calc(100*min(var(--vh,1vh),1vh))}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:40;display:none}
+.modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:20px;padding:32px;z-index:100;max-width:500px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.badge-item{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#fff;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600}
+.progress-bar{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),#8b5cf6);border-radius:4px;transition:width .5s}
+.tab-btn{padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:500;border:none;background:transparent;color:var(--text-light)}.tab-btn.active{background:var(--primary);color:#fff}
+.status-indicator{position:fixed;bottom:12px;right:12px;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:600;z-index:60}
+.online-status{background:#d1fae5;color:#065f46}.offline-status{background:#fee2e2;color:#991b1b}
+.presentation-mode .main-content{margin-left:0;padding:40px}
+.presentation-mode .sidebar{display:none}
+.presentation-mode .status-indicator{display:none}
+.presentation-mode h1{font-size:3rem!important}
+.presentation-mode h2{font-size:2.2rem!important}
+.presentation-mode p,.presentation-mode li{font-size:1.4rem!important}
+.presentation-mode .btn{font-size:1.2rem!important;padding:16px 32px!important}
+.print-only{display:none}
+@media print{.no-print{display:none!important}.print-only{display:block!important}.main-content{margin-left:0!important;padding:0!important}}
+@media(max-width:768px){.sidebar{transform:translateX(-100%)}.sidebar.show-mobile{transform:translateX(0)}.main-content{margin-left:0}.overlay.show{display:block}}
+.canvas-container{border:2px solid #e2e8f0;border-radius:12px;overflow:hidden;touch-action:none}
+.accordion-content{max-height:0;overflow:hidden;transition:max-height .3s}.accordion-content.open{max-height:2000px}
+input,select,textarea{border:2px solid #e2e8f0;border-radius:10px;padding:10px 14px;font-size:14px;width:100%;font-family:inherit}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--primary)}
+.confirm-bar{background:#fef3c7;border:2px solid #f59e0b;border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+</style>
+  <script src="/_sdk/0179d719c431a79e.data_sdk.js" type="text/javascript" integrity="sha512-OsRvJkI5GkC3MJQcgotQYotpzrMSX415GiKKgvYdxQEEkzD/fdchShO2FMSy0PJr/tiINMXOk5Vl2zAgg6bUiA=="></script>
+  <script src="/_sdk/0b3af1c300e720aa.resizing_sdk.js" type="text/javascript" integrity="sha512-nX1P6oXZmEY5wCI2lUVg3BwKu1cr0yi+ZpXgZ0Yn90vkSwvpmyzBMvOyD6VLJUtBwFI2dSrw1b6OvORxSggw3w=="></script>
+ </head>
+ <body data-template-id="__page-root" class="min-h-screen">
+  <div id="app"><!-- Status Indicator -->
+   <div id="statusIndicator" class="status-indicator online-status no-print">
+    ● ONLINE
+   </div><!-- Mobile Menu Toggle --> <button id="mobileMenuBtn" class="fixed top-4 left-4 z-50 bg-indigo-600 text-white p-2 rounded-lg md:hidden no-print" onclick="toggleMobileSidebar()"> <i data-lucide="menu" style="width:24px;height:24px"></i> </button> <!-- Overlay -->
+   <div id="sidebarOverlay" class="overlay" onclick="toggleMobileSidebar()"></div><!-- Sidebar -->
+   <nav id="sidebar" class="sidebar no-print" role="navigation" aria-label="Menu utama">
+    <div class="p-5 border-b border-indigo-800">
+     <h1 data-template-id="app-title" class="canva-text text-lg font-bold text-yellow-300 heading"></h1>
+     <p class="text-indigo-300 text-xs mt-1" id="currentProfileName">Belum ada profil</p>
+    </div>
+    <div class="py-3" id="sidebarMenu"></div>
+    <div class="p-4 border-t border-indigo-800 mt-auto">
+     <div class="text-xs text-indigo-400" id="appVersionSidebar">
+      v1.0.0
+     </div>
+    </div>
+   </nav><!-- Main Content -->
+   <main class="main-content" id="mainContent" role="main">
+    <div id="viewContainer"></div>
+   </main><!-- PIN Modal -->
+   <div id="pinModal" class="modal" style="display:none">
+    <h2 class="heading text-xl mb-4 text-center">🔒 Masukkan PIN Guru</h2><input type="password" id="pinInput" maxlength="6" placeholder="Masukkan PIN" class="text-center text-2xl tracking-widest mb-4" onkeydown="if(event.key==='Enter')verifyPin()">
+    <p id="pinError" class="text-red-500 text-sm text-center mb-4" style="display:none">PIN salah. Coba lagi.</p>
+    <div class="flex gap-3"><button class="btn btn-primary flex-1" onclick="verifyPin()">Masuk</button> <button class="btn btn-outline flex-1" onclick="closePinModal()">Batal</button>
+    </div>
+   </div>
+   <div id="pinOverlay" class="overlay" style="display:none;z-index:90"></div><!-- Confirm Modal -->
+   <div id="confirmModal" class="modal" style="display:none">
+    <h3 class="heading text-lg mb-3" id="confirmTitle">Konfirmasi</h3>
+    <p class="text-gray-600 mb-5" id="confirmMsg"></p>
+    <div class="flex gap-3"><button class="btn btn-danger flex-1" id="confirmYes">Ya</button> <button class="btn btn-outline flex-1" onclick="hideConfirm()">Batal</button>
+    </div>
+   </div>
+   <div id="confirmOverlay" class="overlay" style="display:none;z-index:89"></div>
+  </div>
+  <script src="/_sdk/0754dd8df9d57b49.editing_sdk.js" integrity="sha512-yvKoMK4Ofz067LVljR1M05H+IiYMlPeB85tq/r60nkBNxvzYXf2rquTC3ObXq4eufSZVQ6Z6qWfK1GFj0HTO4w=="></script>
+  <script>
+// ============================================
+// PETUALANGAN MATEMATIKA v1.0.0 - FINAL RELEASE
+// ============================================
+const APP_VERSION='1.0.0',SCHEMA_VERSION='1.0.0',RELEASE_DATE='2026-07-08';
+const APP_NAME='Petualangan Matematika';
+
+// --- UTILITY ---
+function uid(){return Date.now().toString(36)+Math.random().toString(36).substr(2,9)}
+function $(id){return document.getElementById(id)}
+function qs(s,el){return(el||document).querySelector(s)}
+function qsa(s,el){return(el||document).querySelectorAll(s)}
+function escHtml(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function formatDate(d){return new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})}
+function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
+function randInt(a,b){return Math.floor(Math.random()*(b-a+1))+a}
+
+// --- STORAGE ---
+function loadData(key,def){try{const d=localStorage.getItem('petmat_'+key);return d?JSON.parse(d):def}catch(e){return def}}
+function saveData(key,val){try{localStorage.setItem('petmat_'+key,JSON.stringify(val))}catch(e){console.error('Storage full')}}
+
+// --- STATE ---
+let state={
+profiles:loadData('profiles',[]),
+classes:loadData('classes',[]),
+quizResults:loadData('quizResults',[]),
+exerciseResults:loadData('exerciseResults',[]),
+teacherNotes:loadData('teacherNotes',[]),
+backupHistory:loadData('backupHistory',[]),
+settings:loadData('settings',{pinHash:null,ketuntasan:70,lastBackup:null,onboardingDone:false,studentMode:false,demoMode:false,currentProfile:null,guruSessionStart:null}),
+};
+function persist(){
+saveData('profiles',state.profiles);
+saveData('classes',state.classes);
+saveData('quizResults',state.quizResults);
+saveData('exerciseResults',state.exerciseResults);
+saveData('teacherNotes',state.teacherNotes);
+saveData('backupHistory',state.backupHistory);
+saveData('settings',state.settings);
+}
+
+// --- PIN HASHING ---
+async function hashPin(pin){
+if(window.crypto&&window.crypto.subtle){
+const enc=new TextEncoder().encode(pin+'petmat_salt');
+const hash=await crypto.subtle.digest('SHA-256',enc);
+return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+return btoa(pin+'_fallback');
+}
+
+// --- GURU SESSION ---
+let guruUnlocked=false,guruTimer=null;
+function startGuruSession(){guruUnlocked=true;resetGuruTimer();renderSidebar();navigateTo(currentView)}
+function resetGuruTimer(){clearTimeout(guruTimer);guruTimer=setTimeout(()=>{guruUnlocked=false;state.settings.studentMode=true;persist();renderSidebar();navigateTo('beranda')},30*60*1000)}
+function lockGuru(){guruUnlocked=false;clearTimeout(guruTimer);state.settings.studentMode=true;persist();renderSidebar();navigateTo('beranda')}
+
+// --- PIN MODAL ---
+let pinCallback=null;
+function showPinModal(cb){pinCallback=cb;$('pinModal').style.display='block';$('pinOverlay').style.display='block';$('pinInput').value='';$('pinError').style.display='none';$('pinInput').focus()}
+function closePinModal(){$('pinModal').style.display='none';$('pinOverlay').style.display='none';pinCallback=null}
+async function verifyPin(){
+const pin=$('pinInput').value;
+if(!pin){$('pinError').style.display='block';return}
+const h=await hashPin(pin);
+if(!state.settings.pinHash){
+// First time - set PIN
+state.settings.pinHash=h;persist();closePinModal();if(pinCallback)pinCallback();
+}else if(h===state.settings.pinHash){
+closePinModal();if(pinCallback)pinCallback();
+}else{$('pinError').style.display='block';$('pinError').textContent='PIN salah. Coba lagi.'}
+}
+
+// --- CONFIRM DIALOG ---
+function showConfirm(title,msg,cb){
+$('confirmTitle').textContent=title;$('confirmMsg').textContent=msg;
+$('confirmModal').style.display='block';$('confirmOverlay').style.display='block';
+$('confirmYes').onclick=()=>{hideConfirm();cb()};
+}
+function hideConfirm(){$('confirmModal').style.display='none';$('confirmOverlay').style.display='none'}
+
+// --- MOBILE SIDEBAR ---
+function toggleMobileSidebar(){
+const sb=$('sidebar'),ov=$('sidebarOverlay');
+sb.classList.toggle('show-mobile');ov.classList.toggle('show');
+}
+
+// --- NAVIGATION ---
+let currentView='beranda';
+const MENU_ITEMS=[
+{id:'beranda',icon:'home',label:'Beranda',student:true},
+{id:'materi',icon:'book-open',label:'Materi',student:true},
+{id:'latihan',icon:'edit-3',label:'Latihan Soal',student:true},
+{id:'game',icon:'gamepad-2',label:'Game',student:true},
+{id:'kuis',icon:'clipboard-check',label:'Kuis',student:true},
+{id:'hasil',icon:'bar-chart-2',label:'Hasil Belajar',student:true},
+{id:'badge',icon:'award',label:'Badge & Misi',student:true},
+{id:'sertifikat',icon:'file-text',label:'Sertifikat',student:true},
+{id:'dashboard',icon:'layout-dashboard',label:'Dashboard Guru',student:false},
+{id:'presentasi',icon:'monitor',label:'Mode Presentasi',student:false},
+{id:'kelola-kelas',icon:'users',label:'Kelola Kelas',student:false},
+{id:'backup',icon:'database',label:'Pusat Backup',student:false},
+{id:'laporan',icon:'printer',label:'Laporan',student:false},
+{id:'papan-tulis',icon:'pen-tool',label:'Papan Tulis',student:true},
+{id:'panduan',icon:'help-circle',label:'Panduan',student:true},
+{id:'pengaturan',icon:'settings',label:'Pengaturan',student:false},
+{id:'privasi',icon:'shield',label:'Privasi Data',student:true},
+{id:'versi',icon:'info',label:'Info Versi',student:true},
+];
+
+function renderSidebar(){
+const menu=$('sidebarMenu');
+const isStudent=state.settings.studentMode&&!guruUnlocked;
+let html='';
+MENU_ITEMS.forEach(item=>{
+if(isStudent&&!item.student)return;
+html+=`<div class="sidebar-item ${currentView===item.id?'active':''}" onclick="navigateTo('${item.id}')"><i data-lucide="${item.icon}" style="width:18px;height:18px"></i><span>${item.label}</span></div>`;
+});
+if(isStudent){
+html+=`<div class="sidebar-item mt-4 text-yellow-300" onclick="showPinModal(()=>{state.settings.studentMode=false;persist();startGuruSession()})"><i data-lucide="unlock" style="width:18px;height:18px"></i><span>Mode Guru</span></div>`;
+}
+menu.innerHTML=html;
+// Update profile name
+const prof=state.profiles.find(p=>p.id===state.settings.currentProfile);
+$('currentProfileName').textContent=prof?('👤 '+prof.name):'Belum ada profil';
+$('appVersionSidebar').textContent='v'+APP_VERSION;
+lucide.createIcons();
+}
+
+function navigateTo(view){
+currentView=view;
+renderSidebar();
+const container=$('viewContainer');
+// Close mobile sidebar
+$('sidebar').classList.remove('show-mobile');$('sidebarOverlay').classList.remove('show');
+// Reset guru timer on navigation
+if(guruUnlocked)resetGuruTimer();
+// Render view
+switch(view){
+case 'beranda':renderBeranda();break;
+case 'materi':renderMateri();break;
+case 'latihan':renderLatihan();break;
+case 'game':renderGame();break;
+case 'kuis':renderKuis();break;
+case 'hasil':renderHasil();break;
+case 'badge':renderBadge();break;
+case 'sertifikat':renderSertifikat();break;
+case 'dashboard':renderDashboard();break;
+case 'presentasi':renderPresentasi();break;
+case 'kelola-kelas':renderKelolaKelas();break;
+case 'backup':renderBackup();break;
+case 'laporan':renderLaporan();break;
+case 'papan-tulis':renderPapanTulis();break;
+case 'panduan':renderPanduan();break;
+case 'pengaturan':renderPengaturan();break;
+case 'privasi':renderPrivasi();break;
+case 'versi':renderVersi();break;
+default:renderBeranda();
+}
+lucide.createIcons();
+}
+
+// --- MATERI DATA ---
+const MATERI=[
+{id:'bilangan',title:'Bilangan hingga 10.000',icon:'🔢',lessons:[
+{id:'b1',title:'Membaca & Menulis Bilangan',content:'Bilangan terdiri dari ribuan, ratusan, puluhan, dan satuan. Contoh: 3.456 = 3 ribuan + 4 ratusan + 5 puluhan + 6 satuan.'},
+{id:'b2',title:'Nilai Tempat',content:'Setiap angka memiliki nilai sesuai tempatnya. Angka 5 pada 5.234 bernilai 5.000 (ribuan).'},
+{id:'b3',title:'Membandingkan Bilangan',content:'Gunakan tanda > (lebih besar), < (lebih kecil), = (sama dengan). Bandingkan dari nilai tempat terbesar.'},
+{id:'b4',title:'Mengurutkan Bilangan',content:'Urutkan bilangan dari terkecil ke terbesar atau sebaliknya.'},
+]},
+{id:'penjumlahan',title:'Penjumlahan',icon:'➕',lessons:[
+{id:'p1',title:'Penjumlahan Tanpa Menyimpan',content:'Jumlahkan setiap nilai tempat secara terpisah. 234 + 512 = 746.'},
+{id:'p2',title:'Penjumlahan Dengan Menyimpan',content:'Jika jumlah lebih dari 9, simpan 1 ke nilai tempat berikutnya. 367 + 458 = 825.'},
+]},
+{id:'pengurangan',title:'Pengurangan',icon:'➖',lessons:[
+{id:'k1',title:'Pengurangan Tanpa Meminjam',content:'Kurangi setiap nilai tempat. 876 - 432 = 444.'},
+{id:'k2',title:'Pengurangan Dengan Meminjam',content:'Jika angka pengurang lebih besar, pinjam dari nilai tempat sebelahnya.'},
+]},
+{id:'perkalian',title:'Perkalian',icon:'✖️',lessons:[
+{id:'m1',title:'Perkalian Dasar 1-5',content:'Perkalian adalah penjumlahan berulang. 3 × 4 = 4 + 4 + 4 = 12.'},
+{id:'m2',title:'Perkalian Dasar 6-10',content:'Hafal perkalian 6-10 untuk menghitung lebih cepat.'},
+]},
+{id:'pembagian',title:'Pembagian',icon:'➗',lessons:[
+{id:'d1',title:'Pembagian Dasar',content:'Pembagian adalah kebalikan perkalian. 12 ÷ 3 = 4 karena 3 × 4 = 12.'},
+{id:'d2',title:'Pembagian Dengan Sisa',content:'Jika tidak habis dibagi, sisanya ditulis. 13 ÷ 4 = 3 sisa 1.'},
+]},
+];
+
+// --- SOAL GENERATOR ---
+function generateSoal(topic,count=5){
+const soalList=[];
+for(let i=0;i<count;i++){
+let q,a,opts;
+switch(topic){
+case 'bilangan':{
+const n=randInt(100,9999);
+q=`Berapa nilai angka ${String(n)[0]} pada bilangan ${n.toLocaleString('id-ID')}?`;
+const pos=String(n).length-1;
+const vals=[1,10,100,1000];
+a=parseInt(String(n)[0])*vals[pos];
+opts=shuffle([a,a*10,a/10||1,randInt(1,9)*vals[pos]].map(Math.abs)).slice(0,4);
+if(!opts.includes(a))opts[0]=a;
+break;}
+case 'penjumlahan':{
+const x=randInt(10,999),y=randInt(10,999);a=x+y;
+q=`${x} + ${y} = ...`;
+opts=shuffle([a,a+randInt(1,10),a-randInt(1,10),a+randInt(11,20)]);break;}
+case 'pengurangan':{
+const x=randInt(100,999),y=randInt(10,x-1);a=x-y;
+q=`${x} - ${y} = ...`;
+opts=shuffle([a,a+randInt(1,10),a-randInt(1,10),a+randInt(11,20)]);break;}
+case 'perkalian':{
+const x=randInt(2,10),y=randInt(2,10);a=x*y;
+q=`${x} × ${y} = ...`;
+opts=shuffle([a,a+randInt(1,5),a-randInt(1,5),a+randInt(6,10)]);break;}
+case 'pembagian':{
+const y=randInt(2,9),x=y*randInt(2,10);a=x/y;
+q=`${x} ÷ ${y} = ...`;
+opts=shuffle([a,a+1,a-1,a+2]);break;}
+default:{const x=randInt(1,100),y=randInt(1,100);a=x+y;q=`${x}+${y}=?`;opts=shuffle([a,a+1,a-1,a+2])}
+}
+opts=opts.filter(o=>o>=0);
+if(opts.length<4)opts.push(a+3);
+if(!opts.includes(a))opts[0]=a;
+soalList.push({q,a,opts:[...new Set(opts)].slice(0,4)});
+}
+return soalList;
+}
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=randInt(0,i);[a[i],a[j]]=[a[j],a[i]]}return a}
+
+// --- BADGES ---
+const BADGES=[
+{id:'first_lesson',title:'Penjelajah Baru',desc:'Selesaikan materi pertama',icon:'🌟'},
+{id:'five_exercises',title:'Rajin Berlatih',desc:'Selesaikan 5 latihan',icon:'📝'},
+{id:'perfect_quiz',title:'Sempurna!',desc:'Nilai kuis 100',icon:'🏆'},
+{id:'all_topics',title:'Master Matematika',desc:'Selesaikan semua topik',icon:'👑'},
+{id:'ten_games',title:'Gamer Handal',desc:'Main game 10 kali',icon:'🎮'},
+{id:'streak_3',title:'Konsisten',desc:'Belajar 3 hari berturut',icon:'🔥'},
+];
+const MISSIONS=[
+{id:'m1',title:'Selesaikan 1 Materi Hari Ini',target:1,type:'materi'},
+{id:'m2',title:'Kerjakan 3 Latihan',target:3,type:'latihan'},
+{id:'m3',title:'Raih Nilai Kuis ≥ 80',target:80,type:'kuis'},
+{id:'m4',title:'Main 2 Game',target:2,type:'game'},
+];
+
+function checkBadges(profile){
+if(!profile.badges)profile.badges=[];
+const earned=profile.badges;
+const ex=state.exerciseResults.filter(r=>r.studentId===profile.id);
+const qz=state.quizResults.filter(r=>r.studentId===profile.id);
+if(profile.progress&&Object.keys(profile.progress).length>0&&!earned.includes('first_lesson'))earned.push('first_lesson');
+if(ex.length>=5&&!earned.includes('five_exercises'))earned.push('five_exercises');
+if(qz.so
